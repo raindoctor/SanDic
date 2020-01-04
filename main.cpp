@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
     trans2.load(":/rc/qt_" + locale);
     app.installTranslator(&trans2);
 
-    QString dbName = "c:/sandic.db";
+    QString dbName = "sandic.db";
 
     QStringList argvList = QCoreApplication::arguments();
 
