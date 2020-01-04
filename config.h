@@ -8,6 +8,8 @@
 #define PROGNAME "SanDic"
 #define VERSION  "2.5"
 
+#define DBNAME   "sandic.db"
+
 class Config : public QSettings
 {
 public:

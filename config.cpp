@@ -12,7 +12,7 @@ Config::Config() : QSettings(ORGNAME, PROGNAME)
     if (styles.isEmpty())
         styles[":default"] = readFile(":/rc/default.css");
 
-    if (styles.count() == 1) // или удален последний пользовательский стиль
+    if (styles.count() == 1) // Или удален последний пользовательский стиль.
         style = ":default";
 
     order = value("order").toMap();

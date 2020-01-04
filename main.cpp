@@ -28,8 +28,13 @@ int main(int argc, char* argv[])
     QTranslator trans2;
     trans2.load(":/rc/qt_" + locale);
     app.installTranslator(&trans2);
-
-    QString dbName = "sandic.db";
+    // В Маке не работает, пока или указывать полный путь или запускать с параметром.
+    QString dbName = DBNAME;
+    /*
+    #ifdef Q_OS_MAC
+        QString dbName = QApplication::applicationDirPath().append("/").append(DBNAME);
+    #endif
+    */
 
     QStringList argvList = QCoreApplication::arguments();
 
@@ -46,10 +51,12 @@ int main(int argc, char* argv[])
         QMessageBox::critical(0, QObject::tr("Database error"), QObject::tr("Can't open database file: %1").arg(dbName));
         exit(-1);
     }
+    /* Поиск по регуляркам пока отключен.
     // 1. sqlite3_create_function без sqlite3_initialize вызывает ошибку
     // 2. sqlite3_create_function на работает в собранной 64битной версии (mingw73_64)
     sqlite3_initialize();
     sqlite3_create_function(*static_cast<sqlite3**>(db.driver()->handle().data()), "regexp", 2, SQLITE_UTF8, NULL, &regexp, NULL, NULL);
+    */
 
     QSqlQuery query("PRAGMA cache_size = -150000", db); // 153.600.000b
 

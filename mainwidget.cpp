@@ -27,7 +27,7 @@ MainWidget::MainWidget(Config* config, QSqlDatabase* db)
 
     indexList->setUniformItemSizes(true);
     indexList->setModel(model);
-    // для поиска при наборе нужны все слова
+    // Для поиска при наборе нужны все слова.
     while (model->canFetchMore())
         model->fetchMore();
 
@@ -44,6 +44,9 @@ MainWidget::MainWidget(Config* config, QSqlDatabase* db)
     connect(searchTable->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), SLOT(rowChanged(const QModelIndex&, const QModelIndex&)));
     connect(searchTable,  SIGNAL(doubleClicked(QModelIndex)), SLOT(doubleClicked(QModelIndex)));
     connect(searchButton, SIGNAL(clicked()), SLOT(search()));
+    // Поиск по регуляркам пока отключен.
+    rxCheck->setChecked(false);
+    rxCheck->setVisible(false);
 }
 
 void MainWidget::rowChanged(const QModelIndex& current, const QModelIndex& previous)
@@ -90,7 +93,7 @@ void MainWidget::editTextChanged(const QString& txt)
 
 void MainWidget::search()
 {
-    // запрос на поиск поступает от транса, проверка текущей вкладки на 1
+    // Запрос на поиск поступает от транса, проверка текущей вкладки на 1.
     if (!tabWidget->currentIndex())
         return;
 

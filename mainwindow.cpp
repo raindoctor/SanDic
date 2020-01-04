@@ -15,7 +15,7 @@ MainWindow::MainWindow(Config* config, QSqlDatabase* db)
 
     QString txt = "<table class='abbs' width=100%>";
 
-    int nc = 4; // столбцов в таблице
+    int nc = 4; // Столбцов в таблице.
 
     foreach (const QString& origin, abbsMap.keys()) {
         int nr = qCeil(abbsMap[origin].count() / nc);
@@ -216,8 +216,7 @@ void MainWindow::setStyle()
     qApp->setStyleSheet(style);
 
     mainCard->document()->setDefaultStyleSheet(style);
-
-    // не запускать при старте
+    // Не запускать при старте.
     if (!mainCard->windowTitle().isEmpty())
         mainCard->article(mainCard->windowTitle());
 

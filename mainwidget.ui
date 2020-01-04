@@ -141,6 +141,9 @@
          </item>
          <item>
           <widget class="QCheckBox" name="rxCheck">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
