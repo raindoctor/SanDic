@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
     // В Маке не работает, пока или указывать полный путь или запускать с параметром.
     QString dbName = DBNAME;
     /*
-    #ifdef Q_OS_MAC
+    #ifdef Q_OS_MACOS 
         QString dbName = QApplication::applicationDirPath().append("/").append(DBNAME);
     #endif
     */
@@ -57,7 +57,6 @@ int main(int argc, char* argv[])
     sqlite3_initialize();
     sqlite3_create_function(*static_cast<sqlite3**>(db.driver()->handle().data()), "regexp", 2, SQLITE_UTF8, NULL, &regexp, NULL, NULL);
     */
-
     QSqlQuery query("PRAGMA cache_size = -150000", db); // 153.600.000b
 
     QSplashScreen splash(QPixmap(QString(":/rc/splash_%1.png").arg(locale)));

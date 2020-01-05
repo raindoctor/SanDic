@@ -29,3 +29,5 @@ RESOURCES += \
     sandic.qrc
 
 RC_FILE = rc/sandic.rc
+
+# CONFIG-=app_bundle
