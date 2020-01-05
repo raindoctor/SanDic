@@ -30,4 +30,5 @@ RESOURCES += \
 
 RC_FILE = rc/sandic.rc
 
-# CONFIG-=app_bundle
+# Для Мака, на данный момент не нужно
+# CONFIG -= app_bundle

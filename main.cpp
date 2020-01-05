@@ -28,13 +28,17 @@ int main(int argc, char* argv[])
     QTranslator trans2;
     trans2.load(":/rc/qt_" + locale);
     app.installTranslator(&trans2);
-    // В Маке не работает, пока или указывать полный путь или запускать с параметром.
-    QString dbName = DBNAME;
-    /*
-    #ifdef Q_OS_MACOS 
-        QString dbName = QApplication::applicationDirPath().append("/").append(DBNAME);
+
+    #ifdef Q_OS_MACOS
+        QDir bin(QCoreApplication::applicationDirPath());
+        bin.cdUp();
+        bin.cdUp();
+        bin.cdUp();
+    
+        QString dbName = bin.absolutePath().append("/").append(DBNAME);
+    #else
+        QString dbName = DBNAME;
     #endif
-    */
 
     QStringList argvList = QCoreApplication::arguments();
 
