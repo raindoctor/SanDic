@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
     app.installTranslator(&trans2);
 
     #ifdef Q_OS_MACOS
+        // Для перехода в текущий каталог нужно выйти из .app бандла.
         QDir bin(QCoreApplication::applicationDirPath());
         bin.cdUp();
         bin.cdUp();
