@@ -1,16 +1,16 @@
-#include "sqlite/sqlite3.h"
-
 #include "config.h"
 #include "mainwindow.h"
+/*
+#include "../../../Tools/Qt/5.12.6/Src/qtbase/src/3rdparty/sqlite/sqlite3.h"
 
-void regexp(sqlite3_context* context, int /*argc*/, sqlite3_value* argv[])
+void regexp(sqlite3_context* context, int argc, sqlite3_value* argv[])
 {
     QRegExp rx(QRegExp(reinterpret_cast<const char*>(sqlite3_value_text(argv[0]))));
     rx.setCaseSensitivity(Qt::CaseInsensitive);
 
     sqlite3_result_int(context, QString(reinterpret_cast<const char*>(sqlite3_value_text(argv[1]))).contains(rx) ? 1 : 0);
 }
-
+*/
 int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
@@ -29,17 +29,16 @@ int main(int argc, char* argv[])
     trans2.load(":/rc/qt_" + locale);
     app.installTranslator(&trans2);
 
+    QDir bin(QCoreApplication::applicationDirPath());
+
     #ifdef Q_OS_MACOS
         // Для перехода в текущий каталог нужно выйти из .app бандла.
-        QDir bin(QCoreApplication::applicationDirPath());
         bin.cdUp();
         bin.cdUp();
         bin.cdUp();
-    
-        QString dbName = bin.absolutePath().append("/").append(DBNAME);
-    #else
-        QString dbName = DBNAME;
     #endif
+
+    QString dbName = bin.absolutePath().append("/").append(DBNAME);
 
     QStringList argvList = QCoreApplication::arguments();
 
@@ -56,9 +55,12 @@ int main(int argc, char* argv[])
         QMessageBox::critical(0, QObject::tr("Database error"), QObject::tr("Can't open database file: %1").arg(dbName));
         exit(-1);
     }
-    /* Поиск по регуляркам пока отключен.
-    // 1. sqlite3_create_function без sqlite3_initialize вызывает ошибку
-    // 2. sqlite3_create_function на работает в собранной 64битной версии (mingw73_64)
+    /*
+     Поиск по регуляркам пока отключен.
+     1. Необходима версия SQLite идущая с Qt (Tools/Qt/5.12.6/Src/qtbase/src/3rdparty/sqlite).
+     2. sqlite3_create_function без sqlite3_initialize вызывает ошибку.
+     3. sqlite3_create_function зависит от разрадности и для запуска нужно прописывать соответсвтующий путь в PATH=...\Qt\5.12.6\mingw73_64\bin.
+
     sqlite3_initialize();
     sqlite3_create_function(*static_cast<sqlite3**>(db.driver()->handle().data()), "regexp", 2, SQLITE_UTF8, NULL, &regexp, NULL, NULL);
     */
