@@ -38,6 +38,7 @@ make
 make clean
 mv sandic.app /Applications
 cd db; unzip sandic.db.zip; unzip yukta.db.zip
+mv *.db /Applications/sandic.app/Contents/Resources/
 ```
 
 ![Alt text](/misc/imgs/1.jpg?raw=true "Screen1")

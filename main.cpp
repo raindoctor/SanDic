@@ -33,12 +33,12 @@ int main(int argc, char* argv[])
 
     #ifdef Q_OS_MACOS
         // Для перехода в текущий каталог нужно выйти из .app бандла.
+	    // /Applications/sandic.app/Contents/MacOS/sandic --> /Applications/sandic.app/Contents
         bin.cdUp();
-        bin.cdUp();
-        bin.cdUp();
+    	QString dbName = bin.absolutePath().append("/Resources/").append(DBNAME);
+    #else
+    	QString dbName = bin.absolutePath().append("/").append(DBNAME);
     #endif
-
-    QString dbName = bin.absolutePath().append("/").append(DBNAME);
 
     QStringList argvList = QCoreApplication::arguments();
 
